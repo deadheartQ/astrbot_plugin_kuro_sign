@@ -239,7 +239,7 @@ def _resolve_timezone(name: str) -> Any:
         return None
 
 
-@register(PLUGIN_NAME, "Buddy", "库街区（鸣潮 / 战双帕弥什）每日自动签到", PLUGIN_VERSION)
+@register(PLUGIN_NAME, "deadheartQ", "库街区（鸣潮 / 战双帕弥什）每日自动签到", PLUGIN_VERSION)
 class KuroSignPlugin(Star):
     """库街区自动签到插件。"""
 
