@@ -1,0 +1,36 @@
+name: astrbot_plugin_kuro_sign
+display_name: 库街区签到
+desc: |-
+  库街区（鸣潮 / 战双帕弥什）每日自动签到，接口逻辑移植自 Night-stars-1/Kuro-Sign。
+
+  **绑定方式**（三种，都在私聊里做）：
+  1. kj登录 <手机号> —— 短信验证码登录，不用抓包（库街区是单设备登录，可能顶掉手机 APP）。
+  2. kj绑定 <Token> h5 —— 电脑浏览器打开库街区网页版，F12 网络面板取 token，不用手机。
+  3. kj绑定 <Token> android —— 手机 APP（或安卓模拟器）抓包，手机与机器人共存。
+  网页版填 h5、APP 抓包填 android，两者不通用，填错会校验失败并提示换来源。
+
+  Token 与验证码只在私聊里发送，插件也不会把它们打印到日志里。
+
+  **自动签到**：每天按配置时间（默认 00:05，可指定时区）给所有已绑定账号签游戏内签到，
+  结果推给订阅了通知的群；没有群订阅时私聊给账号主人。Token 失效会单独私聊提醒。
+
+  **手动操作**：kj签到 立即签自己的账号，kj状态 查看绑定与最近结果，kj游戏 选择签哪些游戏
+  （弹出菜单后直接回序号即可，也可在面板下拉里设置默认），kj解绑 删除本地保存的 Token。
+
+  **社区任务**：可选开启库街区社区签到、浏览帖子、点赞、分享，默认关闭。
+
+  **稳定性**：接口失败自动退避重试；风控返回非 JSON 时也能识别；单个账号失败不影响其它账号。
+short_desc: 库街区（鸣潮 / 战双）每日自动签到
+version: "1.2.0"
+author: deadheartQ
+repo: https://github.com/deadheartQ/astrbot_plugin_kuro_sign
+# 接口逻辑移植自 Night-stars-1/Kuro-Sign（MIT），详见 README 与 LICENSE 的归属说明。
+astrbot_version: ">=4.10,<5"
+support_platforms:
+  - aiocqhttp
+tags:
+  - 库街区
+  - 鸣潮
+  - 战双帕弥什
+  - 签到
+  - kuro

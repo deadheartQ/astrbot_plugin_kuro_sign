@@ -1,0 +1,16 @@
+# 插件自带 ruff 配置，让检查口径可复现（不依赖上层目录的配置）。
+# line-length 取 100：代码里有不少中文提示串，88 会把它折得很难读。
+line-length = 100
+
+[lint]
+select = ["E", "F", "W", "I", "UP", "B", "S", "ISC", "RUF", "BLE"]
+ignore = [
+    "RUF001", # 中文全角标点不算「易混淆字符」
+    "RUF002",
+    "RUF003",
+    "S311", # devCode 只是随机串，上游同样是 random.choice，与加密无关
+]
+
+[lint.per-file-ignores]
+# 自测脚本用 assert / 宽泛的假件类属性是刻意的
+"tests/*" = ["S101"]

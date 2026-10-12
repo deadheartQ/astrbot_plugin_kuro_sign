@@ -1,0 +1,131 @@
+{
+  "basic": {
+    "type": "object",
+    "description": "基础设置",
+    "hint": "自动签到的时间与网络参数",
+    "items": {
+      "sign_time": {
+        "type": "string",
+        "description": "每日自动签到时间",
+        "default": "00:05",
+        "hint": "格式 HH:MM，例如 00:05"
+      },
+      "timezone": {
+        "type": "string",
+        "description": "定时任务使用的时区",
+        "default": "Asia/Shanghai",
+        "hint": "容器时区常是 UTC，这里显式指定可以避免签到时间整体偏移 8 小时"
+      },
+      "max_users": {
+        "type": "int",
+        "description": "最多处理的账号数",
+        "default": 10,
+        "hint": "0 表示不限制；账号多时建议限制，避免请求过密被风控"
+      },
+      "request_timeout": {
+        "type": "int",
+        "description": "单次请求超时秒数",
+        "default": 15
+      },
+      "delay_seconds": {
+        "type": "int",
+        "description": "账号之间的间隔秒数",
+        "default": 3,
+        "hint": "每个账号签到完成后等待这么久再处理下一个，降低被风控的概率"
+      }
+    }
+  },
+  "sign": {
+    "type": "object",
+    "description": "账号与签到",
+    "hint": "支持两种绑定：用户私聊发 kj登录 用手机验证码登录，或直接 kj绑定 粘贴抓包得到的 Token；面板里也可以填一个公共 Token",
+    "items": {
+      "default_token": {
+        "type": "string",
+        "description": "默认库街区 Token",
+        "default": "",
+        "secret": true,
+        "hint": "填了就每天自动签这个账号，留空则只签用户私聊绑定的账号。Token 获取方式见 README"
+      },
+      "default_source": {
+        "type": "string",
+        "description": "默认 Token 来源",
+        "default": "android",
+        "options": [
+          "android",
+          "h5"
+        ],
+        "hint": "抓包时用的是库街区 APP 就选 android，网页版就选 h5"
+      },
+      "sign_game": {
+        "type": "string",
+        "description": "默认签到游戏",
+        "default": "两个都签",
+        "options": [
+          "两个都签",
+          "只签战双帕弥什",
+          "只签鸣潮"
+        ],
+        "hint": "面板下拉选择，不用记游戏 ID；用户还能私聊 kj游戏 单独设置自己的范围"
+      },
+      "enable_sms_login": {
+        "type": "bool",
+        "description": "允许短信验证码登录",
+        "default": true,
+        "hint": "用户私聊发 kj登录 用手机号加验证码登录；关掉后只能用 kj绑定 粘贴 Token"
+      },
+      "auto_send_code": {
+        "type": "bool",
+        "description": "登录时代机器人自动发验证码",
+        "default": true,
+        "hint": "库街区登录页带极验风控，自动发码可能被拒；失败时会提示用户去登录页自己点发送验证码"
+      }
+    }
+  },
+  "bbs": {
+    "type": "object",
+    "description": "库街区社区任务",
+    "hint": "社区任务会额外发帖浏览、点赞和分享请求，默认关闭；开启前请确认账号可以承受",
+    "items": {
+      "enable_bbs_tasks": {
+        "type": "bool",
+        "description": "开启社区任务总开关",
+        "default": false,
+        "hint": "关闭时只做游戏内签到，不碰社区任务"
+      },
+      "bbs_sign": {
+        "type": "bool",
+        "description": "执行社区签到",
+        "default": true
+      },
+      "look_post": {
+        "type": "bool",
+        "description": "完成浏览帖子任务",
+        "default": true
+      },
+      "like_post": {
+        "type": "bool",
+        "description": "完成点赞帖子任务",
+        "default": true
+      },
+      "share_post": {
+        "type": "bool",
+        "description": "完成分享帖子任务",
+        "default": true
+      }
+    }
+  },
+  "notify": {
+    "type": "object",
+    "description": "通知设置",
+    "hint": "群通知的订阅开关在群里发送 kj订阅 控制",
+    "items": {
+      "notify_umo": {
+        "type": "string",
+        "description": "额外推送目标",
+        "default": "",
+        "hint": "可填一个会话标识，例如 astrbot:GroupMessage:123456；填了就会同时把结果推到这里"
+      }
+    }
+  }
+}
