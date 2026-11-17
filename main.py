@@ -390,6 +390,7 @@ class KuroSignPlugin(Star):
                 CronTrigger(hour=hour, minute=minute),
                 id="kuro_auto_sign",
                 replace_existing=True,
+                misfire_grace_time=3600
             )
             scheduler.start()
             self.scheduler = scheduler
